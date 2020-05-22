@@ -1,5 +1,7 @@
 console.log("Get Caged: Loaded!")
 
+// Updated url before publishing
+const backendUrl = "http://localhost:8000"
 let imgs = document.querySelectorAll("img")
 
 function getRandomElements(list, n = Math.floor(Math.random() * list.length) ){
@@ -25,7 +27,9 @@ if( imgs?.length > 0 ){
 
     for (let img of randImgs){
         // console.log(img)
-        img.src = "https://images.askmen.com/1080x540/2016/11/11-084440-nicolas_cage_life_lessons.jpg"
+        // img.src = "https://images.askmen.com/1080x540/2016/11/11-084440-nicolas_cage_life_lessons.jpg"
+        const {width, height} = img
+        img.src = `${backendUrl}/cage?width=${width}&height=${height}`
     }
 
 } else {
