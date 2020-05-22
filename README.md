@@ -32,8 +32,8 @@ def load_images(...):
   images = files(unprocessed_dir)
   for img in images:
      with process_file(img) as file:
-      width, height, aspect_ratio, blob = get_image_data(file)
-      save_image(width, height, aspect_ratio, blob)
+        width, height, aspect_ratio, blob = get_image_data(file)
+        save_image(width, height, aspect_ratio, blob)
   return "Success"
 ```
 
