@@ -2,7 +2,7 @@
 name = "get_caged"
 version = "0.1.0"
 description = ""
-authors = ["Helena Strandberg <hejhej.helena@gmail.com>"]
+authors = ["Helena Strandberg <hejhej.helena@gmail.com>", "Alexander Hultnér <ahultner@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
