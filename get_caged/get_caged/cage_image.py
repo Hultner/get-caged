@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from PIL import Image
+from PIL.Image import Image
 
 
 class CageImage(BaseModel):
@@ -10,3 +10,6 @@ class CageImage(BaseModel):
     image_data: Image
     face_height_coord: int
     face_width_coord: int
+
+    class Config:
+        arbitrary_types_allowed = True
