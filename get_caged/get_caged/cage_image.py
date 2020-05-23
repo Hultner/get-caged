@@ -1,9 +1,10 @@
+from typing import Optional
 from pydantic import BaseModel
 from PIL.Image import Image
 
 
 class CageImage(BaseModel):
-    id: int
+    id: Optional[int]
     width: int
     height: int
     aspect_ratio: float
