@@ -112,6 +112,6 @@ def find_caged_image(target: TargetImageSpec) -> CageImage:
 
     conn.close()
 
-    item['image_data'] = Image.open(io.BytesIO(item['image_data']))
+    item["image_data"] = Image.open(io.BytesIO(item["image_data"]))
 
     return CageImage(**item)

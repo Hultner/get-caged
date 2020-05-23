@@ -3,8 +3,9 @@ from PIL import Image
 from get_caged.cage_image import CageImage
 
 
-def create_resized_cage_image(cage_image: CageImage,
-                              resized_image: PIL.Image.Image) -> CageImage:
+def create_resized_cage_image(
+    cage_image: CageImage, resized_image: PIL.Image.Image
+) -> CageImage:
     """
     Create a new CageImage from an image with a different size
     :param cage_image: original CageImage
@@ -12,26 +13,28 @@ def create_resized_cage_image(cage_image: CageImage,
     :return: a CageImage with the new dimensions and image
     """
 
-    new_face_height_coord = get_new_face_coord(resized_image.height,
-                                               cage_image.height,
-                                               cage_image.face_height_coord)
-    new_face_width_coord = get_new_face_coord(resized_image.width,
-                                              cage_image.width,
-                                              cage_image.face_width_coord)
+    new_face_height_coord = get_new_face_coord(
+        resized_image.height, cage_image.height, cage_image.face_height_coord
+    )
+    new_face_width_coord = get_new_face_coord(
+        resized_image.width, cage_image.width, cage_image.face_width_coord
+    )
 
-    resized_cage_image = CageImage(id=cage_image.id,
-                                   width=resized_image.width,
-                                   height=resized_image.height,
-                                   aspect_ratio=(resized_image.width / resized_image.height),
-                                   image_data=resized_image,
-                                   face_height_coord=new_face_height_coord,
-                                   face_width_coord=new_face_width_coord)
+    resized_cage_image = CageImage(
+        id=cage_image.id,
+        width=resized_image.width,
+        height=resized_image.height,
+        aspect_ratio=(resized_image.width / resized_image.height),
+        image_data=resized_image,
+        face_height_coord=new_face_height_coord,
+        face_width_coord=new_face_width_coord,
+    )
     return resized_cage_image
 
 
-def resize_keep_aspect_ratio(image: PIL.Image.Image,
-                             target_width: int,
-                             target_height: int) -> (PIL.Image.Image, str):
+def resize_keep_aspect_ratio(
+    image: PIL.Image.Image, target_width: int, target_height: int
+) -> (PIL.Image.Image, str):
     """
     Resize image to target width, but keep the aspect ratio to avoid distorting the image.
 
