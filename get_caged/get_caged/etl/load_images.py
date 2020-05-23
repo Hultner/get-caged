@@ -8,7 +8,7 @@ from PIL import Image
 from pydantic import BaseSettings
 
 from get_caged.cage_image import CageImage
-# from get_caged.db import initialize_db, insert_image
+from get_caged.db import initialize_db, insert_image
 
 repository_root = Path("../../../")
 
@@ -27,7 +27,10 @@ def process_file(file_: Path):
     """
     try:
         yield file_
-    finally:
+    except:
+        raise
+    else:
+        # Only runs if no exception
         destination = ETLSettings().processed_images_folder / file_.name
         with destination.open(mode="xb") as fid:
             fid.write(file_.read_bytes())
@@ -56,7 +59,7 @@ def create_cage_img(img_path: Path) -> CageImage:
 
 def save_img(img: CageImage) -> None:
     "Saves the cage image to the database"
-    pass
+    insert_image(img)
 
 
 def run_processing():
@@ -80,4 +83,6 @@ def run_processing():
 
 
 if __name__ == "__main__":
+    # Initialize database if it doesn't exist
+    initialize_db()
     run_processing()
