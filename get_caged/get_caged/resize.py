@@ -42,7 +42,7 @@ def resize_keep_aspect_ratio(image: PIL.Image.Image,
     """
     ratio_width = target_width / image.width
     ratio_height = target_height / image.height
-    if ratio_width < ratio_height:
+    if ratio_width > ratio_height:
         resized_by = "width"
         resize_width = target_width
         resize_height = round(ratio_width * image.height)
