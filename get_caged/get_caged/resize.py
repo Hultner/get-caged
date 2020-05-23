@@ -3,17 +3,14 @@ from PIL import Image
 from get_caged.cage_image import CageImage
 
 
-def resize_keep_aspect_ratio(cage_image: CageImage, target_width: int) -> CageImage:
+def create_resized_cage_image(cage_image: CageImage,
+                              resized_image: PIL.Image.Image) -> CageImage:
     """
-    Resize image to target width, but keep the aspect ratio to avoid distorting the image.
-
-    :param cage_image: original image
-    :param target_width: the width to resize to
-    :return: CageImage object with the new sized image
+    Create a new CageImage from an image with a different size
+    :param cage_image: original CageImage
+    :param resized_image: the resized image
+    :return: a CageImage with the new dimensions and image
     """
-    width_percent = (target_width / float(cage_image.image_data.size[0]))
-    height = int((float(cage_image.image_data.size[1]) * float(width_percent)))
-    resized_image = cage_image.image_data.resize((target_width, height), PIL.Image.LANCZOS)
 
     new_face_height_coord = get_new_face_coord(resized_image.height,
                                                cage_image.height,
@@ -30,6 +27,32 @@ def resize_keep_aspect_ratio(cage_image: CageImage, target_width: int) -> CageIm
                                    face_height_coord=new_face_height_coord,
                                    face_width_coord=new_face_width_coord)
     return resized_cage_image
+
+
+def resize_keep_aspect_ratio(image: PIL.Image.Image,
+                             target_width: int,
+                             target_height: int) -> (PIL.Image.Image, str):
+    """
+    Resize image to target width, but keep the aspect ratio to avoid distorting the image.
+
+    :param image: original image
+    :param target_width: the width we want
+    :param target_height: the height we want
+    :return: a tuple of resized image, and string saying if it was resized by height or width
+    """
+    ratio_width = target_width / image.width
+    ratio_height = target_height / image.height
+    if ratio_width < ratio_height:
+        resized_by = "width"
+        resize_width = target_width
+        resize_height = round(ratio_width * image.height)
+    else:
+        resized_by = "height"
+        resize_width = round(ratio_height * image.width)
+        resize_height = target_height
+
+    resized_image = image.resize((resize_width, resize_height), Image.LANCZOS)
+    return resized_image, resized_by
 
 
 def get_new_face_coord(new_size: int, old_size: int, old_face_coord: int):
