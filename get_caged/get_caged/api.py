@@ -1,6 +1,6 @@
 from io import BytesIO
 from starlette.responses import StreamingResponse
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 from PIL import Image
 
 from get_caged.cage_image import CageImage
@@ -13,9 +13,8 @@ app = FastAPI()
 
 
 @app.get("/cage")
-async def get_cage_image(width: int = 0, height: int = 0):
+async def get_cage_image(width: int = Query(..., ge=12), height: int = Query(..., ge=12)):
     target = TargetImageSpec(width=width, height=height)
-    # cage_image = get_cage_image_from_spec(target)
     cage_image = find_caged_image(target)
 
     resized_image, resized_by = resize_keep_aspect_ratio(
@@ -34,16 +33,3 @@ async def get_cage_image(width: int = 0, height: int = 0):
     buf.seek(0)
     return StreamingResponse(buf, media_type="image/png")
 
-
-def get_cage_image_from_spec(target: TargetImageSpec):
-    image = Image.open("jpg_cat.png")
-    cage_image = CageImage(
-        id=1,
-        width=400,
-        height=462,
-        aspect_ratio=(400 / 462),
-        image_data=image,
-        face_height_coord=200,
-        face_width_coord=200,
-    )
-    return cage_image
