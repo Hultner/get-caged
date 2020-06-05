@@ -1,1 +1,1 @@
-web: python get_caged/main.py
+web: poetry run python get_caged/main.py
