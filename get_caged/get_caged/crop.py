@@ -5,10 +5,9 @@ from get_caged.cage_image import CageImage
 from get_caged.resize import create_resized_cage_image
 
 
-def crop_by_face_coordinates(cage_image: CageImage,
-                             target_width: int,
-                             target_height: int,
-                             resized_by: str) -> CageImage:
+def crop_by_face_coordinates(
+    cage_image: CageImage, target_width: int, target_height: int, resized_by: str
+) -> CageImage:
     """
     Crops image to get face as much in the center as possible, to avoid
     just getting a forehead or a chin for example.
@@ -26,7 +25,9 @@ def crop_by_face_coordinates(cage_image: CageImage,
 
         image = cage_image.image_data
         while image.width > target_width:
-            if cage_image.face_height_coord < (image.height - cage_image.face_height_coord):
+            if cage_image.face_height_coord < (
+                image.height - cage_image.face_height_coord
+            ):
                 left = 0
                 right = 1
             else:
@@ -41,7 +42,9 @@ def crop_by_face_coordinates(cage_image: CageImage,
 
         image = cage_image.image_data
         while image.height > target_height:
-            if cage_image.face_height_coord < (image.height - cage_image.face_height_coord):
+            if cage_image.face_height_coord < (
+                image.height - cage_image.face_height_coord
+            ):
                 top = 0
                 bottom = 1
             else:

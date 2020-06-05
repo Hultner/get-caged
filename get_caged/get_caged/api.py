@@ -29,7 +29,6 @@ async def get_cage_image(width: int = 0, height: int = 0):
         resized_by=resized_by,
     )
 
-
     buf = BytesIO()
     new_cage_image.image_data.save(buf, format="PNG")
     buf.seek(0)
