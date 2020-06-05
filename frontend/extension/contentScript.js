@@ -34,11 +34,11 @@ if( imgs?.length > 0 ){
         // console.log(img)
         // img.src = "https://images.askmen.com/1080x540/2016/11/11-084440-nicolas_cage_life_lessons.jpg"
         const {width, height} = img
-	if ((width >= 12) && (height >= 12)) {
-        	img.src = `${backendUrl}/cage?width=${width}&height=${height}`
-	} else {
-		console.log("Image is too small, won't fetch cage image")
-	}
+        if ((width >= 12) && (height >= 12)) {
+            img.src = `${backendUrl}/cage?width=${width}&height=${height}`
+        } else {
+            console.log("Image is too small, won't fetch cage image")
+        }
     }
 
 } else {
