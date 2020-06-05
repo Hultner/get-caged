@@ -12,8 +12,8 @@ function getRandomElements(list, n = constrainedRandom(list.length) ){
 }
 
 function constrainedRandom(maxNum, minNum = 3) {
-	const minSafeNum = Math.min(Math.max(minNum, maxNum * 0.03), maxNum)
-	return Math.floor(Math.random()*(maxNum-minSafeNum+1)+minSafeNum);
+    const minSafeNum = Math.min(Math.max(minNum, maxNum * 0.03), maxNum)
+    return Math.floor(Math.random()*(maxNum-minSafeNum+1)+minSafeNum);
 }
 
 console.log(imgs, document)
