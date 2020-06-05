@@ -1,9 +1,7 @@
 from io import BytesIO
 from starlette.responses import StreamingResponse
-from fastapi import FastAPI, HTTPException, Query
-from PIL import Image
+from fastapi import FastAPI, Query
 
-from get_caged.cage_image import CageImage
 from get_caged.resize import resize_keep_aspect_ratio, create_resized_cage_image
 from get_caged.crop import crop_by_face_coordinates
 from get_caged.db import find_caged_image
