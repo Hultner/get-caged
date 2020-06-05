@@ -11,7 +11,9 @@ app = FastAPI()
 
 
 @app.get("/cage")
-async def get_cage_image(width: int = Query(..., ge=12), height: int = Query(..., ge=12)):
+async def get_cage_image(
+    width: int = Query(..., ge=12), height: int = Query(..., ge=12)
+):
     target = TargetImageSpec(width=width, height=height)
     cage_image = find_caged_image(target)
 
@@ -30,4 +32,3 @@ async def get_cage_image(width: int = Query(..., ge=12), height: int = Query(...
     new_cage_image.image_data.save(buf, format="PNG")
     buf.seek(0)
     return StreamingResponse(buf, media_type="image/png")
-
